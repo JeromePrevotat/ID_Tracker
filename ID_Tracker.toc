@@ -1,0 +1,7 @@
+## Interface: 30300
+## Title: ID_Tracker
+## Author: Khatar
+## Version: 1.0a
+## SavedVariablesPerCharacter: nb_id, id_table
+
+scripts\main.lua
