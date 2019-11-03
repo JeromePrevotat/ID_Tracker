@@ -3,21 +3,16 @@ message("DEBUG");
 nb_id = 0;
 id_table = {};
 
-local function get_instance_id(nb_id)
-	local i = 1;
-	local tmp = {};
-	while (i <= nb_id) do
-		tmp[i - 1] = GetSavedInstanceInfo(i);
-		i = i + 1;
-	end;
-	return tmp;
-end;
-
 local EventFrame = CreateFrame("Frame");
 EventFrame:RegisterEvent("PLAYER_ENTERING_WORLD");
 EventFrame:SetScript("OnEvent",
 	function update_id_file(nb_id, id_table)
 		nb_id = GetNumSavedInstances();
-		id_table = get_instance_id(nb_id);
+		local i = 1;
+		while (i <= nb_id) do
+			name, id, reset, difficulty, locked, extended, instanceIDMostSig, isRaid, maxPlayers, difficultyName, numEncounters, encounterProgress = GetSavedInstanceInfo(i);
+			id_table[i] = {name, id, reset, difficulty, locked, extended, instanceIDMostSig, isRaid, maxPlayers, difficultyName, numEncounters, encounterProgress};
+			i = i + 1;
+		end;
 	end;
 end);
