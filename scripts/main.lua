@@ -1,4 +1,4 @@
-message("TEST");
+message("DEBUG");
 
 nb_id = 0;
 id_table = {};
@@ -15,7 +15,6 @@ end;
 
 local EventFrame = CreateFrame("Frame");
 EventFrame:RegisterEvent("PLAYER_ENTERING_WORLD");
-EventFrame:SetScript("OnEvent", update_id_file);
 EventFrame:SetScript("OnEvent",
 	function update_id_file(nb_id, id_table)
 		nb_id = GetNumSavedInstances();
