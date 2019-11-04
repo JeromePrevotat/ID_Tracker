@@ -8,13 +8,14 @@ EventFrame:SetScript("OnEvent", function (this, event, ...)
 	ID_Tracker[event](ID_Tracker, ...)
 end);
 
-function ID_Tracker:PLAYER_ENTERING_WORLD()
-	
+function ID_Tracker:PLAYER_ENTERING_WORLD(init)
+
 	self:SetDefaults()
-	local i = 0;
+	local i = 1;
 	nb_id = GetNumSavedInstances();
-	
-	while (i <= nb_id) do
+	character_name, character_realm = UnitName("player");
+		
+	while (i <= nb_id and nb_id > 0) do
 		name, id, reset, difficulty, locked, extended, instanceIDMostSig, isRaid, maxPlayers, difficultyName, numEncounters, encounterProgress = GetSavedInstanceInfo(i);
 		id_infos = {
 			["name"] = name, 
@@ -36,7 +37,8 @@ function ID_Tracker:PLAYER_ENTERING_WORLD()
 end;
 
 function ID_Tracker:SetDefaults()
-	if not nb_id then nb_id = 0 end;
+	if not character_name or not character_realm then character_name, character_realm = UnitName("player") end;
+	if not nb_id then nb_id = GetNumSavedInstances() end;
 	if not id_table then id_table = {} end;
 	if not id_infos then
 		id_infos = {
@@ -54,4 +56,5 @@ function ID_Tracker:SetDefaults()
 			["encounterProgress"] = 0,
 		}
 	end;
+	return true;
 end
