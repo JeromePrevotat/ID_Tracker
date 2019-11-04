@@ -2,6 +2,7 @@
 ## Title: ID_Tracker
 ## Author: Khatar
 ## Version: 1.0a
-## SavedVariablesPerCharacter: nb_id, id_table, var_debug
+## SavedVariables: id_table, var_debug
+## SavedVariablesPerCharacter: nb_id, var_debug
 
 scripts\main.lua
