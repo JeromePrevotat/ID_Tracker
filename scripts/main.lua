@@ -31,7 +31,7 @@ function ID_Tracker:PLAYER_ENTERING_WORLD(init)
 			["numEncounters"] = numEncounters,
 			["encounterProgress"] = encounterProgress,
 		}
-		id_table[i] = id_infos;	
+		id_table[character_name][i] = id_infos;	
 		i = i + 1;
 	end
 end;
@@ -40,6 +40,13 @@ function ID_Tracker:SetDefaults()
 	if not character_name or not character_realm then character_name, character_realm = UnitName("player") end;
 	if not nb_id then nb_id = GetNumSavedInstances() end;
 	if not id_table then id_table = {} end;
+	
+	character_exists = false;
+	for key,value in pairs(id_table) do
+		if key == character_name then character_exists = true end;
+	end
+	if not character_exists then id_table[character_name] = {} end;
+	
 	if not id_infos then
 		id_infos = {
 			["name"] = "", 
